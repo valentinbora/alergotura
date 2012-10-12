@@ -81,7 +81,7 @@ get_header();
                     callback(message);
                 },
                 error:function(message){
-                    callback(message);
+                    //callback(message);
                     console.log("Error ajax call");
                 }                                
             });
@@ -98,8 +98,8 @@ get_header();
                     if(marker)
                         marker.setMap(null);
                     marker=null;
-                    var position =new google.maps.LatLng(45.7494444, 21.2272222),
-                    //var position=new google.maps.LatLng(parseFloat(message['runkeeper_last_point_lat']), parseFloat(message['runkeeper_last_point_long']));
+                    //var position =new google.maps.LatLng(45.7494444, 21.2272222),
+                    var position=new google.maps.LatLng(parseFloat(message['runkeeper_last_point_lat']), parseFloat(message['runkeeper_last_point_long']));
                   
                     marker = new google.maps.Marker({
                         position:position,

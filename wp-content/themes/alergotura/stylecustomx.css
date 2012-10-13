@@ -1,0 +1,59 @@
+/****** Prieteni / Parteneri ******/
+#partenerigold {
+	display:inline; 
+	float:left;
+	padding:6px 0;
+	margin-bottom:12px; 
+	background:#fff; 
+	border:2px solid #ccc;
+	margin-left:20px;
+}
+#spacingprieteni {
+	margin: 0 20px;
+	display:inline;
+}
+
+/****** Echipa / Membri ******/
+#lin { 
+	width:200px; 
+	height:290px; 
+	display:inline; 
+	float:left; 
+	padding:18px 8px 0px 8px; 
+	margin:5px; 
+	background:#eee; 
+	border:1px solid #ccc; 
+	text-align:center;
+}
+#top { 
+	width:200px; 
+	height:240px; 
+	float:left; 
+}
+
+#bot{ 
+	width:200px; 
+	text-align:center; 
+	color:#1982D1;
+}
+
+/****** Ture ******/
+#alergolider-start {
+	display:inline; 
+	float:left; 
+	padding:10px 8px; 
+	margin:5px; 
+	background:#eee; 
+	border:1px solid #ccc; 
+	text-align:center;
+}
+#alergolider-descr {  
+	text-align:left;
+}
+#alergolider-picture, #alergolider-email, #alergolider-descr, #alergolider-start { 
+	width:200px; 
+	color:#1982D1;
+}
+#alergolider-email {
+	color:#333;
+}

@@ -49,7 +49,7 @@ get_header();
             return {
                 URI:"/wp-admin/admin-ajax.php",
                 data:{
-                    action:"runkeeper-get-update"            
+                    action:"runkeeper_get_update"            
                 },
                 type:"POST"
             };            
@@ -101,25 +101,21 @@ get_header();
             var mover=0;
             var marker;
             setInterval(function(){  
-                BASE.getLatestInformation(function(){                    
-                })
-                var minus=((Math.floor(Math.random()*2))%2)==0;
-                var random=Math.random(8);
-                if(minus)
-                    random=-random;
-                mover+=0.05*random;
-                if(marker)
-                    marker.setMap(null);
-                marker=null;
-                var position=new google.maps.LatLng(45.7494444+mover, 21.2272222+mover);
-                marker = new google.maps.Marker({
-                    position:position,
-                    icon:'wp-content/themes/alergotura/images/runner.png',
-                    map: map,
-                    title: 'Hello World!'
+                BASE.getLatestInformation(function(message){
+                  if(marker)
+                      marker.setMap(null);
+                  marker=null;
+                  var position=new google.maps.LatLng(parseFloat(message['runkeeper_last_point_lat']), parseFloat(message['runkeeper_last_point_long']));
+                  
+                  marker = new google.maps.Marker({
+                      position:position,
+                      icon:'/wp-content/themes/alergotura/images/runner.png',
+                      map: map,
+                      title: 'Hello World!'
+                  });
+                  google.maps.event.trigger(map, 'resize');
                 });
-                google.maps.event.trigger(map, 'resize'); 
-            },500);
+            }, 1000);
         });
         
      

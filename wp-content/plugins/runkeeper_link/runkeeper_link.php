@@ -121,7 +121,7 @@ function runkeeper_link_update_local_records() {
 	     * Compute total distance, store it to options
 	     */
 	    foreach ($rkActivities->items as $activity) {
-	      $totalDistance += floatval($activity->total_distance);
+	      $totalDistance += floatval($activity->total_distance) / 1000;
 	    }
 	    
 	    update_option('runkeeper_total_distance', $totalDistance);
@@ -140,6 +140,8 @@ function runkeeper_link_update_local_records() {
   		  echo $rkAPI->api_last_error;
     		print_r($rkAPI->request_log);
   		}
+  		
+  		ddd($rkActivities->items);
 		}
 	} else {
 		echo $rkAPI->api_last_error;
@@ -183,6 +185,23 @@ if (!wp_next_scheduled('runkeeper_link_update_local_records')) {
 }
 
 register_deactivation_hook(__FILE__, 'runkeeper_link_uninstall');
+
+add_action('wp_ajax_nopriv_runkeeper_get_update', 'runkeeper_link_get_update');
+add_action('wp_ajax_runkeeper_get_update', 'runkeeper_link_get_update');
+
+wp_localize_script('runkeeper-ajax-update', 'Runkeeper', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+
+function runkeeper_link_get_update() {
+  header("Content-Type: application/json");
+  
+  echo json_encode(array(
+    'runkeeper_last_point_lat' => get_option('runkeeper_last_point_lat', 45),
+    'runkeeper_last_point_long' => get_option('runkeeper_last_point_long', 45),
+    'runkeeper_total_distance' => get_option('runkeeper_total_distance', 0),
+  ));
+
+	die(); // this is required to return a proper result
+}
 
 function ddd($what) {
   echo '<pre>';

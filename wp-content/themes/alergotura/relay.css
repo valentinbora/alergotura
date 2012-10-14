@@ -1,0 +1,91 @@
+.maps_content{
+  width: 95%;
+  height: 500px;
+  margin: 0 auto;
+}
+
+#map_canvas{
+  width: 100%;
+  height: 100%;
+}
+
+.progress-box {
+  width: 95%;
+  height: 15px;
+  padding: 2px;
+  margin: 12px 20px 0;
+  background: #DDD;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.progress-box > div {
+  height: 20px;
+}
+
+.progress-box .progress {
+  background: #76d62e url("images/relay/progress-line.gif") repeat-x left top;
+  height: 13px;
+  line-height: 13px;
+  border-left: solid 1px #4c9e1c;
+  border-right: solid 1px #4c9e1c;
+  border-top: solid 1px #65bc1d;
+  border-bottom: solid 1px #317b1a;
+  text-align: right;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+}
+
+.progress-box .progress span {
+  position: relative;
+  right: 10px;
+  font-size: 11px;
+  color: #fff;
+}
+
+.progress-runner {
+  background: url("../images/sprite.png") no-repeat -155px -2491px;
+  width: 20px;
+  height: 23px;
+  position: absolute;
+  margin-left: -20px;
+  top: -27px;
+}
+
+.metric-boxes {
+  padding: 10px 0;
+  border-spacing: 20px;
+}
+
+.metric-box {
+  width: 25%;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  padding: 7px;
+}
+
+.metric-figure {
+  font-size: 36px;
+  line-height: 36px;
+  color: #444;
+  display: block;
+}
+
+.metric-figure .minor {
+  font-size: 12px;
+}
+
+.metric-description {
+  white-space: nowrap;
+}

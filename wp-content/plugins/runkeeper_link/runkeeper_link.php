@@ -143,7 +143,6 @@ function runkeeper_link_update_local_records() {
     		update_option('runkeeper_last_point_lat', $last_path_point->latitude);
     		update_option('runkeeper_last_point_long', $last_path_point->longitude);
     		update_option('runkeeper_last_activity_path', json_encode($points));
-    		$_SESSION['pos'] = 0;
   		} else {
   		  echo $rkAPI->api_last_error;
     		print_r($rkAPI->request_log);
@@ -194,35 +193,22 @@ register_deactivation_hook(__FILE__, 'runkeeper_link_uninstall');
 
 add_action('wp_ajax_nopriv_runkeeper_get_update', 'runkeeper_link_get_update');
 add_action('wp_ajax_runkeeper_get_update', 'runkeeper_link_get_update');
-
-wp_localize_script('runkeeper-ajax-update', 'Runkeeper', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+add_action('runkeeper_link_update_local_records', 'runkeeper_link_update_local_records');
 
 function runkeeper_link_get_update() {
-  @session_start();
-  
-  if (!isset($_SESSION['pos'])) {
-    $_SESSION['pos'] = 0;
-  }
-  
   $path = json_decode(get_option('runkeeper_last_activity_path', '[]'));
 
-  if (isset($path[$_SESSION['pos'] + 1])) {
-    $_SESSION['pos']++;
-  }
-  
-  $point =  $path[$_SESSION['pos']];
-  
   header("Content-Type: application/json");
   
   echo json_encode(array(
     'pos' => $_SESSION['pos'],
-    'runkeeper_last_point_lat' => $point[0], # get_option('runkeeper_last_point_lat', 45),
-    'runkeeper_last_point_long' => $point[1], #get_option('runkeeper_last_point_long', 45),
+    'runkeeper_last_point_lat' => get_option('runkeeper_last_point_lat', 45),
+    'runkeeper_last_point_long' => get_option('runkeeper_last_point_long', 45),
     'runkeeper_total_distance' => get_option('runkeeper_total_distance', 0),
     'runkeeper_last_activity_path' => json_encode($path),
   ));
 
-	die(); // this is required to return a proper result
+	die();
 }
 
 function ddd($what) {

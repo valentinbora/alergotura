@@ -57,16 +57,33 @@ $(document).ready(function() {
     var prevPosLat = -1;
     var prevPosLong = -1;
     var prevProgress = 0;
-    var targetDistance = 3000;
+    var targetDistance = 30;
     
     if ($('.map_canvas').length  || 1) {
       setInterval(function() {
           BASE.getLatestInformation(function(message) {
+            
             var curDistance = parseFloat(message['runkeeper_total_distance']);
             var beautifulCurDistance = String(curDistance).split('.');
+            
+            var beautifulCurDistanceString = '<span class="major">' + beautifulCurDistance[0] + '</span>';
+            if (beautifulCurDistance[1]) {
+              beautifulCurDistanceString += '<span class="minor">.' + beautifulCurDistance[1] + '</span>';
+            }
+            
+            $("#metric-run-distance").html(beautifulCurDistanceString);
+            
+            if (curDistance >= targetDistance) {
+              curDistance = targetDistance;
+            }
+            
             var beautifulRemainingDistance = String(targetDistance - curDistance).split('.');
-            $("#metric-run-distance").html('<span class="major">' + beautifulCurDistance[0] + '</span><span class="minor">.' + beautifulCurDistance[1] + '</span>');
-            $("#metric-remaining-distance").html('<span class="major">' + beautifulRemainingDistance[0] + '</span><span class="minor">.' + beautifulRemainingDistance[1] + '</span>');
+            var beautifulRemainingDistanceString = '<span class="major">' + beautifulRemainingDistance[0] + '</span>';
+            if (typeof beautifulRemainingDistance[1] != 'undefined') {
+              beautifulRemainingDistanceString += '<span class="minor">.' + beautifulRemainingDistance[1] + '</span>';
+            }
+            
+            $("#metric-remaining-distance").html(beautifulRemainingDistanceString);
             
             var progress = curDistance/targetDistance * 100;
             

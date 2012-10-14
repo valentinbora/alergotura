@@ -161,11 +161,11 @@ function runkeeper_force_update_page () {
 }
 
 function runkeeper_link_cron_interval($array) {
-  $period = 60; // Every minute
+  $period = 20;
   
-  $array['everyminute'] = array(
+  $array['everytwentyseconds'] = array(
     'interval' => $period,
-    'display' => 'Every minute'
+    'display' => 'Every 20 seconds'
   );
   
   return $array;
@@ -186,7 +186,7 @@ add_shortcode('runkeeper_login', 'runkeeper_link_login_button');
 add_shortcode('runkeeper_force_update', 'runkeeper_force_update_page');
 
 if (!wp_next_scheduled('runkeeper_link_update_local_records')) {
-  wp_schedule_event(time(), 'everyminute', 'runkeeper_link_update_local_records');
+  wp_schedule_event(time(), 'everytwentyseconds', 'runkeeper_link_update_local_records');
 }
 
 register_deactivation_hook(__FILE__, 'runkeeper_link_uninstall');
